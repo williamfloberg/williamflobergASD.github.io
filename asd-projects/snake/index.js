@@ -109,8 +109,20 @@ function moveSnake() {
   column for each snakeSquare in the snake's body. The parts of the snake are 
   stored in the Array snake.body and each part knows knows its current 
   column/row properties. 
-  
   */
+  for (var i = snake.body.length - 1; i > 0; i--) {
+    var snakeSquare = snake.body[i];
+
+    var nextSnakeSquare = snake.body[i-1];
+    var nextRow = nextSnakeSquare.row;
+    var nextColumn = nextSnakeSquare.column;
+    var nextDirection = nextSnakeSquare.direction;
+
+    snakeSquare.direction = nextDirection;
+    snakeSquare.row = nextRow;
+    snakeSquare.column = nextColumn;
+    repositionSquare(snakeSquare);
+  }
 
   //Before moving the head, check for a new direction from the keyboard input
   checkForNewDirection();
@@ -203,8 +215,10 @@ function handleAppleCollision() {
   makeSnakeSquare(row, column);
 }
 
+
+
 function hasCollidedWithSnake() {
-  /* 
+ /* 
   TODO 12: Should return true if the snake's head has collided with any part of the
   snake's body.
   
@@ -212,9 +226,17 @@ function hasCollidedWithSnake() {
   head and each part of the snake's body also knows its own row and column.
   
   */
+  for (let i = 1; i < snake.body.length; i++) {
+    const snakePart = snake.body[i];
 
+    if (snake.head.row === snakePart.row && snake.head.column === snakePart.column) {
+      return true;
+    }
+  }
   return false;
 }
+
+
 
 function endGame() {
   // stop update function from running
