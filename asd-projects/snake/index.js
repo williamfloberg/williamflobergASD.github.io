@@ -42,11 +42,11 @@ $("body").on("keydown", handleKeyDown);
 init();
 
 function init() {
-  board.css("background-image", "url('https://s3.ezgif.com/tmp/ezgif-3-7eeeb38397.jpg')"); 
+  board.css("background-image", "url('https://media.tenor.com/-0y5KgG52soAAAAe/teteshrek-cat-reaction.png')"); 
   board.css("background-size", "cover"); //makes image cover entire board
   board.css("background-position", "center"); //centers it
   //background things
-  $("body").css("background-image", "url('https://s3.ezgif.com/tmp/ezgif-3-7eeeb38397.jpg')"); 
+  $("body").css("background-image", "url('https://media.tenor.com/-0y5KgG52soAAAAe/teteshrek-cat-reaction.png')"); 
   $("body").css("background-size", "cover"); //makes image cover whole screen
   $("body").css("background-repeat", "no-repeat"); //makes image not repeat
 
@@ -299,7 +299,7 @@ var snakeSquare = {};
 // make the snakeSquare.element Object and append it to the board
 snakeSquare.element = $("<div>").addClass("snake").appendTo(board);
  //sets bg image for each square
-  snakeSquare.element.css("background-image", "url('https://s3.ezgif.com/tmp/ezgif-3-7eeeb38397.jpg')"); 
+  snakeSquare.element.css("background-image", "url('https://media.tenor.com/nBR_oOC_J0YAAAAM/cat-angry.gif')"); 
   snakeSquare.element.css("background-size", "cover"); //makes image cover block
   snakeSquare.element.css("background-position", "center"); //centers it
   snakeSquare.element.css("background-repeat", "no-repeat"); //prevents it from repeating
