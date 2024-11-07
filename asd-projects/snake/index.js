@@ -8,7 +8,6 @@
 var board = $("#board");
 var scoreElement = $("#score");
 var highScoreElement = $("#highScore");
-
 // TODO 4a: Create the snake, apple and score variables
 // Game Variables
 var snake = {};
@@ -43,8 +42,16 @@ $("body").on("keydown", handleKeyDown);
 init();
 
 function init() {
+  board.css("background-image", "url('https://s3.ezgif.com/tmp/ezgif-3-7eeeb38397.jpg')"); 
+  board.css("background-size", "cover"); //makes image cover entire board
+  board.css("background-position", "center"); //centers it
+  //background things
+  $("body").css("background-image", "url('https://s3.ezgif.com/tmp/ezgif-3-7eeeb38397.jpg')"); 
+  $("body").css("background-size", "cover"); //makes image cover whole screen
+  $("body").css("background-repeat", "no-repeat"); //makes image not repeat
+
   // TODO 4c-2: initialize the snake
-// initialize the snake's body as an empty Array
+  // initialize the snake's body as an empty Array
 snake.body = [];
 
 // make the first snakeSquare and set it as the head
@@ -226,16 +233,15 @@ function hasCollidedWithSnake() {
   head and each part of the snake's body also knows its own row and column.
   
   */
-  for (let i = 1; i < snake.body.length; i++) {
-    const snakePart = snake.body[i];
-
-    if (snake.head.row === snakePart.row && snake.head.column === snakePart.column) {
-      return true;
+    for (var i = 1; i < snake.body.length; i++) {
+      var snakePart = snake.body[i];
+  
+      if (snake.head.row === snakePart.row && snake.head.column === snakePart.column) {
+        return true;
+      }
     }
+    return false;
   }
-  return false;
-}
-
 
 
 function endGame() {
@@ -292,6 +298,11 @@ var snakeSquare = {};
 
 // make the snakeSquare.element Object and append it to the board
 snakeSquare.element = $("<div>").addClass("snake").appendTo(board);
+ //sets bg image for each square
+  snakeSquare.element.css("background-image", "url('https://s3.ezgif.com/tmp/ezgif-3-7eeeb38397.jpg')"); 
+  snakeSquare.element.css("background-size", "cover"); //makes image cover block
+  snakeSquare.element.css("background-position", "center"); //centers it
+  snakeSquare.element.css("background-repeat", "no-repeat"); //prevents it from repeating
 
 // initialize the row and column properties on the snakeSquare Object
 snakeSquare.row = row;
