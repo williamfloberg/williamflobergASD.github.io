@@ -42,12 +42,13 @@ $("body").on("keydown", handleKeyDown);
 init();
 
 function init() {
-  board.css("background-image", "url('https://media.tenor.com/-0y5KgG52soAAAAe/teteshrek-cat-reaction.png')"); 
+  board.css("background-image", "url('https://assets3.thrillist.com/v1/image/3101228/792x1056/scale;webp=auto;jpeg_quality=60.jpg')"); 
   board.css("background-size", "cover"); //makes image cover entire board
   board.css("background-position", "center"); //centers it
   //background things
-  $("body").css("background-image", "url('https://media.tenor.com/-0y5KgG52soAAAAe/teteshrek-cat-reaction.png')"); 
+  $("body").css("background-image", "url('https://media.tenor.com/mNj1Gs5Kp-kAAAAM/cat-funny.gif')"); 
   $("body").css("background-size", "cover"); //makes image cover whole screen
+  $("body").css("background-position", "center"); // centers it
   $("body").css("background-repeat", "no-repeat"); //makes image not repeat
 
   // TODO 4c-2: initialize the snake
@@ -62,8 +63,45 @@ makeApple();
   // TODO 5a: Initialize the interval
 // start update interval
 updateInterval = setInterval(update, 100);
+if (!document.getElementById('changeAppleColorButton')) {
+  var changeAppleColorButton = document.createElement('button');
+  changeAppleColorButton.id = 'changeAppleColorButton';
+  changeAppleColorButton.textContent = 'Change Apple Color';
+  changeAppleColorButton.style.marginTop = '10px';
+  changeAppleColorButton.style.padding = '10px 20px';
+  changeAppleColorButton.style.cursor = 'pointer';
+  document.body.appendChild(changeAppleColorButton);
 
+  changeAppleColorButton.addEventListener('click', function() {
+    var colors = ['red', 'yellow', 'green', 'orange', 'purple'];
+    var randomColor = colors[Math.floor(Math.random() * colors.length)];
+    $('.apple').css('background-color', randomColor);
+  });
 }
+if (!document.getElementById('pauseButton')) {
+  var pauseButton = document.createElement('button');
+  pauseButton.id = 'pauseButton';
+  pauseButton.textContent = 'Pause';
+  pauseButton.style.marginTop = '10px';
+  pauseButton.style.padding = '10px 20px';
+  pauseButton.style.cursor = 'pointer';
+  document.body.appendChild(pauseButton);
+
+  var isPaused = false;
+  pauseButton.addEventListener('click', function() {
+    if (!isPaused) {
+      clearInterval(updateInterval);
+      pauseButton.textContent = 'Resume';
+      isPaused = true;
+    } else {
+      updateInterval = setInterval(update, 100);
+      pauseButton.textContent = 'Pause';
+      isPaused = false;
+    }
+  });
+}
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////// PROGRAM FUNCTIONS ////////////////////////////////////
@@ -197,11 +235,13 @@ function hasCollidedWithApple() {
 
 
 function handleAppleCollision() {
-  // increase the score and update the score DOM element
   score++;
   scoreElement.text("Score: " + score);
+  scoreElement.css("color", "red");
+  setTimeout(function() {
+    scoreElement.css("color", "");
+  }, 300);
 
-  // Remove existing Apple and create a new one
   apple.element.remove();
   makeApple();
 
@@ -244,21 +284,32 @@ function hasCollidedWithSnake() {
   }
 
 
-function endGame() {
-  // stop update function from running
-  clearInterval(updateInterval);
-
-  // clear board of all elements
-  board.empty();
-
-  // update the highScoreElement to display the highScore
-  highScoreElement.text("High Score: " + calculateHighScore());
-  scoreElement.text("Score: 0");
-  score = 0;
-
-  // restart the game after 500 ms
-  setTimeout(init, 500);
-}
+  function endGame() {
+    clearInterval(updateInterval);
+    board.empty();
+    highScoreElement.text("High Score: " + calculateHighScore());
+    scoreElement.text("Score: 0");
+    score = 0;
+  
+    // Create a restart button if it doesn't exist
+    if (!document.getElementById('restartButton')) {
+      var restartButton = document.createElement('button');
+      restartButton.id = 'restartButton';
+      restartButton.textContent = 'Restart';
+      restartButton.style.marginTop = '20px';
+      restartButton.style.padding = '10px 20px';
+      restartButton.style.cursor = 'pointer';
+      document.body.appendChild(restartButton);
+  
+      restartButton.addEventListener('click', function() {
+        board.empty();
+        restartButton.remove();
+        init();
+      });
+    }
+  
+    alert("Game Over! Click OK to restart.");
+  }
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
