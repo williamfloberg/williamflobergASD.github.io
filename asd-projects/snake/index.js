@@ -254,8 +254,8 @@ function handleAppleCollision() {
   If the tail is moving "down", place the next snakeSquare above it.
   etc...
   */
-  var row = 0;
-  var column = 0;
+  var row;
+  var column;
 
   // code to determine the row and column of the snakeSquare to add to the snake
 
