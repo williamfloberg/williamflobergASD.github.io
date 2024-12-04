@@ -254,27 +254,26 @@ function handleAppleCollision() {
   If the tail is moving "down", place the next snakeSquare above it.
   etc...
   */
-  var row;
-  var column;
 
   // code to determine the row and column of the snakeSquare to add to the snake
+var row = 0;
+var column = 0;
 
-  makeSnakeSquare(row, column);
   if(snake.tail.direction === "left"){
-    makeSnakeSquare(snake.tail.row,snake.tail.column + 1)
-  }
-  if(snake.tail.direction === "right"){
-    makeSnakeSquare(snake.tail.row,snake.tail.column - 1)
-  }
-  if(snake.tail.direction === "up"){
-    makeSnakeSquare(snake.tail.row +1 ,snake.tail.column)
-  }
-  if(snake.tail.direction === "down"){
-    makeSnakeSquare(snake.tail.row-1,snake.tail.column)
-  }
+    row = snake.tail.row 
+  column = snake.tail.column - 1
+  }if(snake.tail.direction === "right"){
+  row = snake.tail.row
+  column = snake.tail.column + 1
+  }if(snake.tail.direction === "up"){
+    row = snake.tail.row + 1
+    column = snake.tail.column
+  }if(snake.tail.direction === "down"){
+    row = snake.tail.row + 1
+    column = snake.tail.column
 }
-
-
+makeSnakeSquare(row, column);
+}
 
 
 function hasCollidedWithSnake() {
