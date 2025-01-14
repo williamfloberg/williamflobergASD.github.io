@@ -136,6 +136,32 @@ function runProgram(){
     walker2.yPos -= walker2.speedY
   }
   }
+
+  function handleMouseMove(event) {
+    // get the mouse location from the event object
+    moveBlueSquare(event.pageX, event.pageY);  
+    
+    if (doCollide(red, blue)) {
+        showResult(true);
+    } else {
+        showResult(false);
+    }
+}
+function doCollide(walker1, walker2){
+  if(
+    walker2.rightX > walker1.leftX &&
+    walker2.leftX < walker1.rightX &&
+    walker2.bottomY > walker1.topY &&
+    walker2.topY < walker1.bottomY
+    ){
+    return true;
+  } else {
+    return false;
+  }
+}
+  function showResult(result) {
+    $("p1").text('doCollide: ' + result);
+}
   
   function endGame() {
     // stop the interval timer
