@@ -23,7 +23,7 @@ function applyAndRender() {
   //applyFilter(reddify);
   //applyFilter(decreaseBlue);
   //applyFilter(increaseGreen);
-  //applyFilterNoBackground(decreaseBlue);
+  applyFilterNoBackground(decreaseBlue);
 
   // do not change the below line of code
   render($("#display"), image);
